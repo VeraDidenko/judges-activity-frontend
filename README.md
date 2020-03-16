@@ -1,4 +1,4 @@
-# judges-activity
+# Welcome to the Judges Activity Application
 
 
 ## How to run:
