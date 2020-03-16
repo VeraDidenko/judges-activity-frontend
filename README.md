@@ -9,12 +9,12 @@ git clone https://github.com/VeraDidenko/judges-activity-frontend.git
 cd judges-activity-frontend
 ```
 
-###### 1) Install the required dependencies:
+###### 2) Install the required dependencies:
 ```bash
 yarn
 ```
 
-###### 2) Run the application:
+###### 3) Run the application:
 ```bash
 yarn start
 ```
