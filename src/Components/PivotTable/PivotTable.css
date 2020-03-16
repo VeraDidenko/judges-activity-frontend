@@ -1,0 +1,14 @@
+.home-container{
+    padding: 50px;
+    background-color: #EEE8D5;
+    min-height: 100vh;
+}
+
+.icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    stroke-width: 0;
+    stroke: currentColor;
+    fill: currentColor;
+}
