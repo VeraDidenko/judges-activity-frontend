@@ -63,7 +63,7 @@ function PivotTable(props) {
                 }
             ]
             
-            // delete the first tab
+            // delete the not needed tabs
             delete tabs[0];
             delete tabs[1];
             delete tabs[2];
@@ -102,41 +102,14 @@ function PivotTable(props) {
                     width="100%" 
                     report={{
                         dataSource: {
-                          type: "json",
-                          data: [{
-                            "Name":"Andrew T.K.",
-                            "Activity": 99.3,
-                          },{
-                            "Name":"Petrenko A.A.",
-                            "Activity": 99.2,
-                          },{
-                            "Name":"William A.W.",
-                            "Activity": 50.2,
-                          }]
-                        },
-                        "slice": {
-                            "rows": [
-                                {
-                                    "uniqueName": "Name"
-                                }
-                            ],
-                            "columns": [
-                                {
-                                    "uniqueName": "[Measures]"
-                                }
-                            ],
-                            "measures": [
-                                {
-                                    "uniqueName": "Activity",
-                                    "aggregation": "sum"
-                                }
-                            ]
-                        },
-                        "options": {
-                            "grid": {
-                                "type": "flat",
-                                "showTotals": "off",
-                                "showGrandTotals": "off", 
+                          type: "csv",
+                          filename: "http://localhost:8080/data"
+                      },
+                        options: {
+                            grid: {
+                                type: "flat",
+                                showTotals: "off",
+                                showGrandTotals: "off", 
                             }
                         },
                       }}
