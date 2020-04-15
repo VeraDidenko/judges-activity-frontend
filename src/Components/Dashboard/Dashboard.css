@@ -1,8 +1,8 @@
-.Welcome {
+.Dashboard {
     text-align: center;
   }
   
-  .Welcome-header {
+  .Dashboard-header {
     background-color: #282c34;
     min-height: 100vh;
     display: flex;
@@ -13,6 +13,13 @@
     color: white;
   }
   
-  .Welcome-link {
+  .Dashboard-link {
     color: #61dafb;
+  }
+
+  .btn-group, .btn-group-vertical {
+    width: 100%;
+}
+  .btn{
+      border-radius: 0 !important;
   }

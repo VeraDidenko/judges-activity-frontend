@@ -7,10 +7,57 @@ function PivotTable(props) {
     let theme = "";
 
     const ref = React.useRef();    
-    
-    const onReportComplete = () => {
-        console.log(">>>>", ref.current.flexmonster(), ref.current.flexmonster().getReport());
-    }
+
+    let reportActivity = {
+      dataSource: {
+        type: "csv",
+        filename: "http://localhost:8080/data-activity"
+      },
+      slice: {
+
+      },
+      options: {
+          grid: {
+              type: "flat",
+              showTotals: "off",
+              showGrandTotals: "off", 
+          }
+      },
+    };
+
+    let reportMonth = {
+      dataSource: {
+        type: "csv",
+        filename: "http://localhost:8080/data-month"
+      },
+      slice: {
+
+      },
+      options: {
+          grid: {
+              type: "flat",
+              showTotals: "off",
+              showGrandTotals: "off", 
+          }
+      },
+    };
+
+    let reportStatus = {
+      dataSource: {
+        type: "csv",
+        filename: "http://localhost:8080/data-status"
+      },
+      slice: {
+
+      },
+      options: {
+          grid: {
+              type: "flat",
+              showTotals: "off",
+              showGrandTotals: "off", 
+          }
+      },
+    };
 
     const setTheme = (cssUrl) => {
         var prevThemeTags = getPrevTheme();
@@ -50,29 +97,65 @@ function PivotTable(props) {
     }
 
     const customizeToolbar = (toolbar) => {
+
         // get all tabs
         var tabs = toolbar.getTabs();
         toolbar.getTabs = function () {
 
             tabs[5].menu = [
                 {
-                    id: "fm-tab-toggleHeaders",
-                    title: "Toggle Headers",
-                    handler: toggleHeaders,
-                    icon: this.icons.options
+                  id: "fm-tab-classic",
+                  title: "Classic view",
+                  handler: setClassic,
+                  icon: this.icons.grid
+                },{
+                  id: "fm-tab-compact",
+                  title: "Compact view",
+                  handler: setCompact,
+                  icon: this.icons.grid
+                },{
+                  id: "fm-tab-flat",
+                  title: "Flat view",
+                  handler: setFlat,
+                  icon: this.icons.grid
                 }
-            ]
-            
-            // delete the not needed tabs
-            delete tabs[0];
-            delete tabs[1];
-            delete tabs[2];
+            ];
 
-            tabs.splice(4, 0, {
-                id: "fm-tab-toggleDark",
-                title: "Night",
-                handler: toggleDarkMode,
-                icon: ic
+            tabs[0].menu = [
+               {
+                  id: "fm-tab-connect1",
+                  title: "Judge activity",
+                  handler: () => {
+                    ref.current.flexmonster().setReport(reportActivity);
+                  },
+                  icon: this.icons.connect
+               },{
+                  id: "fm-tab-connect2",
+                  title: "Activity by month",
+                  handler: () => {
+                    ref.current.flexmonster().setReport(reportMonth);
+                  },
+                  icon: this.icons.connect
+               },{
+                  id: "fm-tab-connect3",
+                  title: "Activity by Status",
+                  handler: () => {
+                    ref.current.flexmonster().setReport(reportStatus);
+                  },
+                  icon: this.icons.connect
+               }
+            ];
+
+            tabs[1].menu.pop();
+            
+            delete tabs[9];
+
+            tabs.splice(11, 0, {
+              id: "fm-tab-toggleDark",
+              title: "Night",
+              handler: toggleDarkMode,
+              icon: ic,
+              rightGroup: true
             });
 
             return tabs;
@@ -84,9 +167,23 @@ function PivotTable(props) {
             setTheme('https://cdn.flexmonster.com/'+theme+'flexmonster.min.css');
         }
 
-        var toggleHeaders = function() {
+        var setClassic = function() {
             var options = ref.current.flexmonster().getOptions({withDefaults: true});
-            options.grid.showHeaders = !options.grid.showHeaders;
+            options.grid.type = "classic";
+            ref.current.flexmonster().setOptions(options);
+            ref.current.flexmonster().refresh();
+        }
+
+        var setFlat = function() {
+            var options = ref.current.flexmonster().getOptions({withDefaults: true});
+            options.grid.type = "flat";
+            ref.current.flexmonster().setOptions(options);
+            ref.current.flexmonster().refresh();
+        }
+
+        var setCompact = function() {
+            var options = ref.current.flexmonster().getOptions({withDefaults: true});
+            options.grid.type = "compact";
             ref.current.flexmonster().setOptions(options);
             ref.current.flexmonster().refresh();
         }
@@ -99,11 +196,12 @@ function PivotTable(props) {
                 <FlexmonsterReact.Pivot 
                     ref={ref} 
                     toolbar={true} 
-                    width="100%" 
+                    width="100%"
+                    height="100%"
                     report={{
                         dataSource: {
                           type: "csv",
-                          filename: "http://localhost:8080/data"
+                          filename: "http://localhost:8080/data-status"
                       },
                         options: {
                             grid: {
@@ -113,7 +211,6 @@ function PivotTable(props) {
                             }
                         },
                       }}
-                    reportcomplete={onReportComplete}
                     beforetoolbarcreated={customizeToolbar}
                 />
            </div>;    

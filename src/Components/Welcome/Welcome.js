@@ -1,10 +1,15 @@
 import React from 'react';
 import './Welcome.css';
 
-function App() {
+function Welcome() {
   return (
-    <h1>Welcome!</h1>
+    <div className="Welcome">
+      <header className="Welcome-header">
+        Know your judge!<br/>
+        Keep track of judges' activity
+      </header>
+    </div>
   );
 }
 
-export default App;
+export default Welcome;

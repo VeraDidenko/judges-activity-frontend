@@ -1,7 +1,7 @@
 .home-container{
-    padding: 50px;
-    background-color: #EEE8D5;
-    min-height: 100vh;
+    padding-top: 56px;
+    background-color: #282c34;
+    height: 100%;
 }
 
 .icon {
